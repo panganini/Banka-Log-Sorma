@@ -1,0 +1,129 @@
+<html>
+
+<head></head>
+
+<body>
+
+    <div class="container-fluid" style="height:500px;">
+        <div class="row">
+            <div class="col-6">
+                <table class="table table-striped align-middle table-sm" style="width:100%;" id="mailList1">
+                </table>
+            </div>
+            <div class="col-6">
+                <table class="table table-striped align-middle table-sm" style="width:100%;" id="mailList2">
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="https://shift2.blob.core.windows.net/jira/css/bootstrap.min.css" />
+    <script src="https://shift2.blob.core.windows.net/jira/js/bootstrap.min.js"></script>
+
+    <script src="https://shift2.blob.core.windows.net/jira/js/jquery-3.7.1.min.js"></script>
+
+    <script src="https://shift2.blob.core.windows.net/jira/js/jquery.dataTables.min.js"></script>
+
+    <link rel="stylesheet" href="https://shift2.blob.core.windows.net/jira/css/dataTables.bootstrap5.min.css" />
+    <script src="https://shift2.blob.core.windows.net/jira/js/dataTables.bootstrap5.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $("#mailList1").DataTable({
+                processing: true,
+                searching: false,
+                info: false,
+                paging: false,
+                ordering: false,
+                columns: [
+                    {
+                        title: "AcqUId",
+                        data: "acquId",
+                        visible: false
+                    },
+                    {
+                        title: "Bank",
+                        data: "bank",
+                        render: function (data, type, row) {
+                            return `<span class="badge text-bg-primary me-2">${row.acquId}</span>${data}
+                            <a class="btn btn-sm btn-warning fw-semibold ms-2" href="mailto:${row.settlement.to}?cc=${row.settlement.cc}&subject=${row.settlement.subject}${data}&body=${row.settlement.body}">Günsonu Hata</a>`;
+                        }
+                    },
+                    {
+                        data: "settlement",
+                        visible: false
+                    }
+                ],
+                data: [
+                    { acquId: "1", bank: "Akbank", settlement: { to: "uyeisyeriveprovizyondestek@akbank.com;BTIzlemeSistemleriYonetimi@akbank.com;POSOperasyon@akbank.com", cc: "tr.gunsonuhata-yurtici@payten.com", subject: "Günsonu Hata - ", body: "Merhaba%2C%0A%0AA%C5%9Fa%C4%9F%C4%B1daki%20%C3%BCye%20i%C5%9Fyerleri%20g%C3%BCnsonunda%20hata%20alm%C4%B1%C5%9Ft%C4%B1r.%0ATaraf%C4%B1n%C4%B1zda%20gerekli%20kontroleri%20sa%C4%9Flay%C4%B1p%20terminal%20stat%C3%BCs%C3%BCn%C3%BCn%20a%C3%A7%C4%B1k%2Fkapal%C4%B1%20olma%20durumu%20ve%20hata%20sebebini%20payla%C5%9Fabilir%20misiniz%3F" } },
+                    { acquId: "4", bank: "TEB", settlement: { to: "sysops@teb.com.tr;AltYapiOperasyonlariBirimi@teb.com.tr;TebSanalPosDestek@teb.com.tr;PO@teb.com.tr;PMD@teb.com.tr;POS_SCRUM_TEAM@teb.com.tr;nazmiye.aslan@teb.com.tr", cc: "tr.gunsonuhata-yurtici@payten.com", subject: "Günsonu Hata - ", body: "Merhaba%2C%0A%0AA%C5%9Fa%C4%9F%C4%B1daki%20%C3%BCye%20i%C5%9Fyerleri%20g%C3%BCnsonunda%20hata%20alm%C4%B1%C5%9Ft%C4%B1r.%0ATaraf%C4%B1n%C4%B1zda%20gerekli%20kontroleri%20sa%C4%9Flay%C4%B1p%20terminal%20stat%C3%BCs%C3%BCn%C3%BCn%20a%C3%A7%C4%B1k%2Fkapal%C4%B1%20olma%20durumu%20ve%20hata%20sebebini%20payla%C5%9Fabilir%20misiniz%3F" } },
+                    { acquId: "5", bank: "Halkbank", settlement: { to: "SanalPOS@halkbank.com.tr;yavuz.gevencli@halkbank.com.tr;selman.ocak@halkbank.com.tr", cc: "tr.gunsonuhata-yurtici@payten.com", subject: "Günsonu Hata - ", body: "Merhaba%2C%0A%0AA%C5%9Fa%C4%9F%C4%B1daki%20%C3%BCye%20i%C5%9Fyerleri%20g%C3%BCnsonunda%20hata%20alm%C4%B1%C5%9Ft%C4%B1r.%0ATaraf%C4%B1n%C4%B1zda%20gerekli%20kontroleri%20sa%C4%9Flay%C4%B1p%20terminal%20stat%C3%BCs%C3%BCn%C3%BCn%20a%C3%A7%C4%B1k%2Fkapal%C4%B1%20olma%20durumu%20ve%20hata%20sebebini%20payla%C5%9Fabilir%20misiniz%3F" } },
+                    { acquId: "7", bank: "İş Bankası", settlement: { to: "UyeIsyeriPosOperasyon@isbank.com.tr", cc: "tr.gunsonuhata-yurtici@payten.com", subject: "Günsonu Hata - ", body: "Merhaba%2C%0A%0AA%C5%9Fa%C4%9F%C4%B1daki%20%C3%BCye%20i%C5%9Fyerleri%20g%C3%BCnsonunda%20hata%20alm%C4%B1%C5%9Ft%C4%B1r.%0ATaraf%C4%B1n%C4%B1zda%20gerekli%20kontroleri%20sa%C4%9Flay%C4%B1p%20terminal%20stat%C3%BCs%C3%BCn%C3%BCn%20a%C3%A7%C4%B1k%2Fkapal%C4%B1%20olma%20durumu%20ve%20hata%20sebebini%20payla%C5%9Fabilir%20misiniz%3F" } },
+                    { acquId: "9", bank: "Anadolubank", settlement: { to: "operasyonyardim@anadolubank.com.tr;Atmposoperasyon@anadolubank.com.tr;BT-BanksoftSistemGelistirme@anadolubank.com.tr", cc: "tr.gunsonuhata-yurtici@payten.com", subject: "Günsonu Hata - ", body: "Merhaba%2C%0A%0AA%C5%9Fa%C4%9F%C4%B1daki%20%C3%BCye%20i%C5%9Fyerleri%20g%C3%BCnsonunda%20hata%20alm%C4%B1%C5%9Ft%C4%B1r.%0ATaraf%C4%B1n%C4%B1zda%20gerekli%20kontroleri%20sa%C4%9Flay%C4%B1p%20terminal%20stat%C3%BCs%C3%BCn%C3%BCn%20a%C3%A7%C4%B1k%2Fkapal%C4%B1%20olma%20durumu%20ve%20hata%20sebebini%20payla%C5%9Fabilir%20misiniz%3F" } },
+                    { acquId: "12", bank: "Cardplus", settlement: { to: "UIY@card-plus.net;BT@card-plus.net;UrazD@card-plus.net", cc: "tr.gunsonuhata-yurtdisi@payten.com", subject: "Günsonu Hata - ", body: "Merhaba%2C%0A%0AA%C5%9Fa%C4%9F%C4%B1daki%20%C3%BCye%20i%C5%9Fyerleri%20g%C3%BCnsonunda%20hata%20alm%C4%B1%C5%9Ft%C4%B1r.%0ATaraf%C4%B1n%C4%B1zda%20gerekli%20kontroleri%20sa%C4%9Flay%C4%B1p%20terminal%20stat%C3%BCs%C3%BCn%C3%BCn%20a%C3%A7%C4%B1k%2Fkapal%C4%B1%20olma%20durumu%20ve%20hata%20sebebini%20payla%C5%9Fabilir%20misiniz%3F" } },
+                    { acquId: "13", bank: "Credit Europe", settlement: { to: "andrei.burciu@crediteurope.ro;ecommerce@crediteurope.ro;POSOperations@crediteurope.ro;networking@crediteurope.ro", cc: "tr.gunsonuhata-yurtdisi@payten.com", subject: "Settlement Error - ", body: "Hello%2C%0A%0AThe%20terminals%20below%20are%20getting%20errors%20during%20settlement.%0ACan%20you%20check%20errors%20and%20inform%20us%20if%20the%20terminals%20are%20active%20or%20not%3F" } },
+                    { acquId: "15", bank: "ING", settlement: { to: "khbg@ingbank.com.tr;khf@ingbank.com.tr;KartHizPosOperasyon@ingbank.com.tr;sistemoperasyon@ingbank.com.tr", cc: "tr.gunsonuhata-yurtici@payten.com", subject: "Günsonu Hata - ", body: "Merhaba%2C%0A%0AA%C5%9Fa%C4%9F%C4%B1daki%20%C3%BCye%20i%C5%9Fyerleri%20g%C3%BCnsonunda%20hata%20alm%C4%B1%C5%9Ft%C4%B1r.%0ATaraf%C4%B1n%C4%B1zda%20gerekli%20kontroleri%20sa%C4%9Flay%C4%B1p%20terminal%20stat%C3%BCs%C3%BCn%C3%BCn%20a%C3%A7%C4%B1k%2Fkapal%C4%B1%20olma%20durumu%20ve%20hata%20sebebini%20payla%C5%9Fabilir%20misiniz%3F" } },
+                    { acquId: "16", bank: "Credit Europe Russia", settlement: { to: "IT.SystemOperation@crediteurope.ru;IT.NAT@crediteurope.ru;MerchantHotLine@crediteurope.ru", cc: "tr.gunsonuhata-yurtdisi@payten.com", subject: "Settlement Error - ", body: "Hello%2C%0A%0AThe%20terminals%20below%20are%20getting%20errors%20during%20settlement.%0ACan%20you%20check%20errors%20and%20inform%20us%20if%20the%20terminals%20are%20active%20or%20not%3F" } },
+                    { acquId: "17", bank: "Demirbank", settlement: { to: "IT-COD@demirbank.kg", cc: "tr.gunsonuhata-yurtdisi@payten.com", subject: "Settlement Error - ", body: "Hello%2C%0A%0AThe%20terminals%20below%20are%20getting%20errors%20during%20settlement.%0ACan%20you%20check%20errors%20and%20inform%20us%20if%20the%20terminals%20are%20active%20or%20not%3F" } },
+                    { acquId: "18", bank: "Halkbank Macedonia", settlement: { to: "Ecommercesupport@halkbank.mk;Help24@halkbank.mk;ITCardAdmins@halkbank.mk;cards@halkbank.mk;Tina.trenceva@halkbank.mk;Support.Center@asseco-see.mk", cc: "tr.gunsonuhata-yurtdisi@payten.com", subject: "Settlement Error - ", body: "Hello%2C%0A%0AThe%20terminals%20below%20are%20getting%20errors%20during%20settlement.%0ACan%20you%20check%20errors%20and%20inform%20us%20if%20the%20terminals%20are%20active%20or%20not%3F" } },
+                    { acquId: "19", bank: "Ziraat Bankası", settlement: { to: "sanalpos@ziraatbank.com.tr", cc: "tr.gunsonuhata-yurtici@payten.com", subject: "Günsonu Hata - ", body: "Merhaba%2C%0A%0AA%C5%9Fa%C4%9F%C4%B1daki%20%C3%BCye%20i%C5%9Fyerleri%20g%C3%BCnsonunda%20hata%20alm%C4%B1%C5%9Ft%C4%B1r.%0ATaraf%C4%B1n%C4%B1zda%20gerekli%20kontroleri%20sa%C4%9Flay%C4%B1p%20terminal%20stat%C3%BCs%C3%BCn%C3%BCn%20a%C3%A7%C4%B1k%2Fkapal%C4%B1%20olma%20durumu%20ve%20hata%20sebebini%20payla%C5%9Fabilir%20misiniz%3F" } },
+                    { acquId: "20", bank: "YKB Azerbaycan", settlement: { to: "uyeisyeri@yapikredi.com.az", cc: "YKBAZCardPOSSystems@yapikredi.com.az;tr.gunsonuhata-yurtdisi@payten.com", subject: "Settlement Error - ", body: "Hello%2C%0A%0AThe%20terminals%20below%20are%20getting%20errors%20during%20settlement.%0ACan%20you%20check%20errors%20and%20inform%20us%20if%20the%20terminals%20are%20active%20or%20not%3F" } },
+                ]
+            });
+
+            $("#mailList2").DataTable({
+                processing: true,
+                searching: false,
+                info: false,
+                paging: false,
+                ordering: false,
+                columns: [
+                    {
+                        title: "AcqUId",
+                        data: "acquId",
+                        visible: false
+                    },
+                    {
+                        title: "Bank",
+                        data: "bank",
+                        render: function (data, type, row) {
+                            return `<span class="badge text-bg-primary me-2">${row.acquId}</span>${data}
+                            <a class="btn btn-sm btn-warning fw-semibold ms-2" href="mailto:${row.settlement.to}?cc=${row.settlement.cc}&subject=${row.settlement.subject}${data}&body=${row.settlement.body}">Günsonu Hata</a>`;
+                        }
+                    },
+                    {
+                        data: "settlement",
+                        visible: false
+                    }
+                ],
+                data: [
+                    { acquId: "22", bank: "Şekerbank", settlement: { to: "gunsonuizlemeoperasyon@sekerbank.com.tr;POSOPERASYONLARI@sekerbank.com.tr;eod@sekerbank.com.tr", cc: "tr.gunsonuhata-yurtici@payten.com", subject: "Günsonu Hata - ", body: "Merhaba%2C%0A%0AA%C5%9Fa%C4%9F%C4%B1daki%20%C3%BCye%20i%C5%9Fyerleri%20g%C3%BCnsonunda%20hata%20alm%C4%B1%C5%9Ft%C4%B1r.%0ATaraf%C4%B1n%C4%B1zda%20gerekli%20kontroleri%20sa%C4%9Flay%C4%B1p%20terminal%20stat%C3%BCs%C3%BCn%C3%BCn%20a%C3%A7%C4%B1k%2Fkapal%C4%B1%20olma%20durumu%20ve%20hata%20sebebini%20payla%C5%9Fabilir%20misiniz%3F" } },
+                    { acquId: "23", bank: "İş Bankası London", settlement: { to: "UyeIsyeriPosOperasyon@isbank.com.tr", cc: "tr.gunsonuhata-yurtici@payten.com", subject: "Günsonu Hata - ", body: "Merhaba%2C%0A%0AA%C5%9Fa%C4%9F%C4%B1daki%20%C3%BCye%20i%C5%9Fyerleri%20g%C3%BCnsonunda%20hata%20alm%C4%B1%C5%9Ft%C4%B1r.%0ATaraf%C4%B1n%C4%B1zda%20gerekli%20kontroleri%20sa%C4%9Flay%C4%B1p%20terminal%20stat%C3%BCs%C3%BCn%C3%BCn%20a%C3%A7%C4%B1k%2Fkapal%C4%B1%20olma%20durumu%20ve%20hata%20sebebini%20payla%C5%9Fabilir%20misiniz%3F" } },
+                    { acquId: "24", bank: "AlternatifBank", settlement: { to: "posyardim@alternatifbank.com.tr;Murat.Kaygun@alternatifbank.com.tr;KartliOdemeSistemleriUygulamaGelistirmeBirimi@alternatifbank.com.tr;Zeynep.Alptekin@alternatifbank.com.tr", cc: "tr.gunsonuhata-yurtici@payten.com", subject: "Günsonu Hata - ", body: "Merhaba%2C%0A%0AA%C5%9Fa%C4%9F%C4%B1daki%20%C3%BCye%20i%C5%9Fyerleri%20g%C3%BCnsonunda%20hata%20alm%C4%B1%C5%9Ft%C4%B1r.%0ATaraf%C4%B1n%C4%B1zda%20gerekli%20kontroleri%20sa%C4%9Flay%C4%B1p%20terminal%20stat%C3%BCs%C3%BCn%C3%BCn%20a%C3%A7%C4%B1k%2Fkapal%C4%B1%20olma%20durumu%20ve%20hata%20sebebini%20payla%C5%9Fabilir%20misiniz%3F" } },
+                    { acquId: "25", bank: "Kombank", settlement: { to: "ecommerce@kombank.com;violeta.stojanovic@nlbkb.rs;operationrs@euronetworldwide.com", cc: "tr.gunsonuhata-yurtdisi@payten.com;Djordje.Saskovic@payten.com;Nenad.Pavlovic@payten.com;ecommerce@nlbkb.rs;support_vpos@asseco-see.rs", subject: "Settlement Error - ", body: "Hello%2C%0A%0AThe%20terminals%20below%20are%20getting%20errors%20during%20settlement.%0ACan%20you%20check%20errors%20and%20inform%20us%20if%20the%20terminals%20are%20active%20or%20not%3F" } },
+                    { acquId: "28", bank: "TFKB", settlement: { to: "OSOM-Posoperayonservisi@turkiyefinans.com.tr;PosYonetimiServisi@turkiyefinans.com.tr", cc: "tr.gunsonuhata-yurtici@payten.com;atom@turkiyefinans.com.tr", subject: "Günsonu Hata - ", body: "Merhaba%2C%0A%0AA%C5%9Fa%C4%9F%C4%B1daki%20%C3%BCye%20i%C5%9Fyerleri%20g%C3%BCnsonunda%20hata%20alm%C4%B1%C5%9Ft%C4%B1r.%0ATaraf%C4%B1n%C4%B1zda%20gerekli%20kontroleri%20sa%C4%9Flay%C4%B1p%20terminal%20stat%C3%BCs%C3%BCn%C3%BCn%20a%C3%A7%C4%B1k%2Fkapal%C4%B1%20olma%20durumu%20ve%20hata%20sebebini%20payla%C5%9Fabilir%20misiniz%3F" } },
+                    { acquId: "29", bank: "TEB Kosova", settlement: { to: "BS_Card_Systems_Team@teb-kos.com;system_administration@teb-kos.com;Fraud_Monitoring@teb-kos.com", cc: "tr.gunsonuhata-yurtdisi@payten.com", subject: "Settlement Error - ", body: "Hello%2C%0A%0AThe%20terminals%20below%20are%20getting%20errors%20during%20settlement.%0ACan%20you%20check%20errors%20and%20inform%20us%20if%20the%20terminals%20are%20active%20or%20not%3F" } },
+                    { acquId: "30", bank: "İş Bankası AG", settlement: { to: "UyeIsyeriPosOperasyon@isbank.com.tr", cc: "tr.gunsonuhata-yurtici@payten.com", subject: "Günsonu Hata - ", body: "Merhaba%2C%0A%0AA%C5%9Fa%C4%9F%C4%B1daki%20%C3%BCye%20i%C5%9Fyerleri%20g%C3%BCnsonunda%20hata%20alm%C4%B1%C5%9Ft%C4%B1r.%0ATaraf%C4%B1n%C4%B1zda%20gerekli%20kontroleri%20sa%C4%9Flay%C4%B1p%20terminal%20stat%C3%BCs%C3%BCn%C3%BCn%20a%C3%A7%C4%B1k%2Fkapal%C4%B1%20olma%20durumu%20ve%20hata%20sebebini%20payla%C5%9Fabilir%20misiniz%3F" } },
+                    { acquId: "31", bank: "Halkbank Serbia", settlement: { to: "card.ops@halkbank.rs;Zoran.Jovanovic@halkbank.rs;Marko.Gligoric@halkbank.rs", cc: "tr.gunsonuhata-yurtdisi@payten.com;Djordje.Saskovic@payten.com;Nenad.Pavlovic@payten.com", subject: "Settlement Error - ", body: "Hello%2C%0A%0AThe%20terminals%20below%20are%20getting%20errors%20during%20settlement.%0ACan%20you%20check%20errors%20and%20inform%20us%20if%20the%20terminals%20are%20active%20or%20not%3F" } },
+                    { acquId: "32", bank: "Fibabanka", settlement: { to: "KartveADKOperasyonlari@fibabanka.com.tr;Operatorgrubu@fibabanka.com.tr;odemesistemleriurunyonetimi@fibabanka.com.tr;isyeriveposuygulamalari@fibabanka.com.tr", cc: "tr.gunsonuhata-yurtici@payten.com", subject: "Günsonu Hata - ", body: "Merhaba%2C%0A%0AA%C5%9Fa%C4%9F%C4%B1daki%20%C3%BCye%20i%C5%9Fyerleri%20g%C3%BCnsonunda%20hata%20alm%C4%B1%C5%9Ft%C4%B1r.%0ATaraf%C4%B1n%C4%B1zda%20gerekli%20kontroleri%20sa%C4%9Flay%C4%B1p%20terminal%20stat%C3%BCs%C3%BCn%C3%BCn%20a%C3%A7%C4%B1k%2Fkapal%C4%B1%20olma%20durumu%20ve%20hata%20sebebini%20payla%C5%9Fabilir%20misiniz%3F" } },
+                    { acquId: "34", bank: "AlSaqi", settlement: { to: "m.natheer@alsaqi.iq;hussein.z@alsaqi.iq;ahmed.m@alsaqi.iq;Ali@alsaqi.iq;khalid.a@alsaqi.iq;hussein.j@alsaqi.iq;tayseer.abod@alsaqi.iq;zaid@alsaqi.iq", cc: "tr.gunsonuhata-yurtdisi@payten.com", subject: "Settlement Error - ", body: "Hello%2C%0A%0AThe%20terminals%20below%20are%20getting%20errors%20during%20settlement.%0ACan%20you%20check%20errors%20and%20inform%20us%20if%20the%20terminals%20are%20active%20or%20not%3F" } },
+                    { acquId: "51", bank: "AIK", settlement: { to: "e-commerce@aikbanka.rs;operationrs@euronetworldwide.com;kartice@aikbanka.rs", cc: "tr.gunsonuhata-yurtdisi@payten.com;Djordje.Saskovic@payten.com;Nenad.Pavlovic@payten.com", subject: "Settlement Error - ", body: "Hello%2C%0A%0AThe%20terminals%20below%20are%20getting%20errors%20during%20settlement.%0ACan%20you%20check%20errors%20and%20inform%20us%20if%20the%20terminals%20are%20active%20or%20not%3F" } },
+                    { acquId: "52", bank: "BKT", settlement: { to: "sistemizlemeveoperasyonservisi@aktiftech.com;mesut.baydere@aktiftech.com;selin.taskazan@aktiftech.com;ozlem.toktay@aktiftech.com;gokhan.calik@aktiftech.com;erol.derman@aktiftech.com;burcay.aydin@aktiftech.com;ozgur.bilgin@aktiftech.com", cc: "tr.gunsonuhata-yurtdisi@payten.com;shysaj@bkt.com.al;kpamuk@bkt.com.al;posapp@bkt.com.al", subject: "Settlement Error - ", body: "Hello%2C%0A%0AThe%20terminals%20below%20are%20getting%20errors%20during%20settlement.%0ACan%20you%20check%20errors%20and%20inform%20us%20if%20the%20terminals%20are%20active%20or%20not%3F" } },
+                    { acquId: "53", bank: "BKT Kosova", settlement: { to: "sistemizlemeveoperasyonservisi@aktiftech.com;mesut.baydere@aktiftech.com;selin.taskazan@aktiftech.com;ozlem.toktay@aktiftech.com;gokhan.calik@aktiftech.com;erol.derman@aktiftech.com;burcay.aydin@aktiftech.com;ozgur.bilgin@aktiftech.com", cc: "tr.gunsonuhata-yurtdisi@payten.com;eahmeti@bkt.com.al;lsfishta@bkt.com.al;shkryeziu@bkt.com.al;", subject: "Settlement Error - ", body: "Hello%2C%0A%0AThe%20terminals%20below%20are%20getting%20errors%20during%20settlement.%0ACan%20you%20check%20errors%20and%20inform%20us%20if%20the%20terminals%20are%20active%20or%20not%3F" } },
+                ]
+            });
+
+        });
+
+    </script>
+
+    <style>
+        * {
+            font-size: 14px;
+        }
+    </style>
+
+</body>
+
+</html>
